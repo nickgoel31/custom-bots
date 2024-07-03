@@ -121,7 +121,7 @@ function EditBotForm({bot}:{bot:Bot}) {
                     <Input placeholder="shadcn" {...field} />
                 </FormControl>
                 <FormDescription>
-                    This will be your bot's public name
+                    This will be your bot&apos;s public name
                 </FormDescription>
                 <FormMessage />
                 </FormItem>
@@ -146,7 +146,7 @@ function EditBotForm({bot}:{bot:Bot}) {
                     </SelectContent>
                 </Select>
                 <FormDescription>
-                    This will be your bot's gender
+                    This will be your bot&apos;s gender
                 </FormDescription>
                 <FormMessage />
                 </FormItem>
@@ -309,7 +309,7 @@ function EditBotForm({bot}:{bot:Bot}) {
                         <Input placeholder="shadcn" {...field} />
                     </FormControl>
                     <FormDescription>
-                        Describe your bot's personality
+                        Describe your bot&apos;s personality
                     </FormDescription>
                     <FormMessage />
                     </FormItem>
@@ -325,7 +325,7 @@ function EditBotForm({bot}:{bot:Bot}) {
                         <Input placeholder="shadcn" {...field} />
                     </FormControl>
                     <FormDescription>
-                        Describe your bot's physical features
+                        Describe your bot&apos;s physical features
                     </FormDescription>
                     <FormMessage />
                     </FormItem>
@@ -341,7 +341,7 @@ function EditBotForm({bot}:{bot:Bot}) {
                         <Input placeholder="shadcn" {...field} />
                     </FormControl>
                     <FormDescription>
-                        Describe your bot's speaking style
+                        Describe your bot&apos;s speaking style
                     </FormDescription>
                     <FormMessage />
                     </FormItem>

@@ -39,7 +39,7 @@ const UploadBotPicDialog = ({onChange,field}:{onChange: (e: any) => void, field:
 
     useEffect(() => {
         onChange(uploadedImageUrl)
-    },[uploadedImageUrl])
+    },[uploadedImageUrl, onChange])
   return (
    
         <Dialog>

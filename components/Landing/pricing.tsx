@@ -7,7 +7,7 @@ const PricingHome = () => {
     <div className="mx-auto max-w-2xl sm:text-center">
       <h2 className="text-3xl font-bold tracking-tight  sm:text-4xl">Simple no-tricks pricing</h2>
       <p className="mt-6 text-lg leading-8 -600">
-        Let's talk money?
+        Let&apos;s talk money?
         
       </p>
     </div>
