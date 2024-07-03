@@ -8,7 +8,7 @@ const CreateBotPage = () => {
             <div>
                 <h1 className='text-4xl font-bold leading-normal'>Create new bot</h1>
                 <p className='font-medium text-sm text-muted-foreground'>
-                    You can create a new bot by specifying it's details.
+                    You can create a new bot by specifying it&apos;s details.
                 </p>
             </div>
 

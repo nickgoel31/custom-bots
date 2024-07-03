@@ -30,7 +30,7 @@ const DisplayNameInput = ({displayName,userId}:{displayName:string,userId:string
     <div className='display name flex flex-col gap-1 '>
           <h1 className='font-semibold  leading-normal'>Display Name</h1>
           <p className='text-muted-foreground text-sm font-medium'>
-            This is the name bot's will refer to you as.
+            This is the name bot&apos;s will refer to you as.
           </p>
           <div className='flex items-center gap-3'>
             <Input placeholder='User' onChange={(e) => setDisplayName(e.target.value)} value={displayNameState} className='max-w-96'/>

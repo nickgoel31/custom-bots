@@ -76,7 +76,7 @@ const PrivacyPolicyPage = () => {
     
     <h4 className="font-semibold text-lg">Usage Data</h4>
     <p className="font-medium text-muted-foreground text-sm">Usage Data is collected automatically when using the Service.</p>
-    <p className="font-medium text-muted-foreground text-sm">Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
+    <p className="font-medium text-muted-foreground text-sm">Usage Data may include information such as Your Device&apos;s Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
     <p className="font-medium text-muted-foreground text-sm">When You access the Service by or through a mobile device, We may collect certain information automatically, including, but not limited to, the type of mobile device You use, Your mobile device unique ID, the IP address of Your mobile device, Your mobile operating system, the type of mobile Internet browser You use, unique device identifiers and other diagnostic data.</p>
     <p className="font-medium text-muted-foreground text-sm">We may also collect information that Your browser sends whenever You visit our Service or when You access the Service by or through a mobile device.</p>
     

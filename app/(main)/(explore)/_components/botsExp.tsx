@@ -78,7 +78,7 @@ const BotsExplorePage = ({bots}:{bots: Bot[]}) => {
 
           <div className='bots grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
               {botsState.map((bot) => (
-                <div className='border bg-muted rounded-lg shadow-md overflow-hidden h-72 p-4 flex flex-col'>
+                <div key={bot.id} className='border bg-muted rounded-lg shadow-md overflow-hidden h-72 p-4 flex flex-col'>
                     <div className=' h-full flex-1 w-full flex flex-col items-center justify-center gap-4'>
                         <div className='relative w-20 h-20 rounded-full overflow-hidden'>
                             <Image src={bot.image || ""} alt={bot.name} width={1000} height={1000} className='w-full object-cover h-full'/>
