@@ -59,7 +59,7 @@ const PricingHome = () => {
               <span className="text-5xl font-bold tracking-tight ">$0</span>
               <span className="text-sm font-semibold leading-6 tracking-wide -600">USD</span>
             </p>
-            <a href="#" className="mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get Started</a>
+            <a href="/sign-in" className="mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get Started</a>
             <p className="mt-6 text-xs leading-5 -600">
                 No credit card required
             </p>
@@ -117,7 +117,7 @@ const PricingHome = () => {
               <span className="text-5xl font-bold tracking-tight ">$9.99</span>
               <span className="text-sm font-semibold leading-6 tracking-wide -600">USD / m</span>
             </p>
-            <a href="#" className="mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get Started</a>
+            <a href="/sign-in" className="mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get Started</a>
             <p className="mt-6 text-xs leading-5 -600">
                 No credit card required. 3 days free trial
             </p>
