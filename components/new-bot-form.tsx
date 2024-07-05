@@ -27,13 +27,13 @@ import {
 import UploadBotPicDialog from "./upload-pic-dialog"
 import Image from "next/image"
 import { botSchema, gendersArray } from "@/schemas"
-import useAuth from "@/hooks/useAuth"
-import { useSession } from "next-auth/react"
 import { createBotInDb } from "@/actions/create-bot"
 import { redirect, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Switch } from "./ui/switch"
 import { botCategories } from "@/types"
+import { useAuth } from "@clerk/nextjs"
+import useUserDB from "@/hooks/useUserDB"
   
 
 
@@ -42,7 +42,9 @@ import { botCategories } from "@/types"
 
 
 function NewBotForm() {
-    const session = useSession()
+    const session = useAuth()
+    if(!session.userId || !session.isSignedIn) return;
+    const user = useUserDB(session.userId)
     const [botCreated, setBotCreated] = useState<boolean>(false)
     const [loading, setLoading] = useState(false)
     const searchParams = useSearchParams()
@@ -94,8 +96,8 @@ function NewBotForm() {
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof botSchema>) {
     setLoading(true)
-    if(!session || !session.data || !session.data.user || !session.data.user.email) return;
-    createBotInDb(values, session.data.user.email)
+    if(!user || !user.email) return;
+    createBotInDb(values, user.email)
         .then(res => {
             if(res.messageCode === "S001"){
                 setBotCreated(true)

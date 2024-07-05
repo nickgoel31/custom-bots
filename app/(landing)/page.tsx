@@ -1,4 +1,4 @@
-import { auth } from "@/auth"
+
 import FeaturesHome from "@/components/Landing/features"
 import Footer from "@/components/Landing/footer"
 import HeroBanner from "@/components/Landing/hero"

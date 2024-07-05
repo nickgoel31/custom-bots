@@ -2,19 +2,19 @@ import { Button } from '@/components/ui/button'
 import { getBotFromId, getBotsFromUserId } from '@/helpers/get-bot'
 import Link from 'next/link'
 import React from 'react'
-import { auth } from "@/auth"
 import { getUserByEmail } from "@/helpers/get-user"
 import { redirect } from 'next/navigation'
 import Image from 'next/image'
 import { getChatsFromUserId } from '@/helpers/get-chat'
 import { ChevronRight } from 'lucide-react'
 import DeleteChatBtn from '../../_components/delete-chat-btn'
+import { auth, currentUser } from '@clerk/nextjs/server'
 
 
 const DashboardChatsPage = async () => {
-    const session = await auth()
-    if (!session || !session.user?.email) redirect("/sign-in")
-    const user = await getUserByEmail(session.user.email)
+    const session = await currentUser()
+    if (!session) redirect("/sign-in")
+    const user = await getUserByEmail(session.emailAddresses[0].emailAddress)
     if(!user) return;
     const chats = await getChatsFromUserId(user.id)
   return (

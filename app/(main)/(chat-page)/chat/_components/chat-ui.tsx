@@ -8,7 +8,7 @@ import { v4 } from "uuid"
 import { Textarea } from '@/components/ui/textarea'
 import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
-import { Bot, Chat, MessageUser, Message as PrismaMessage, Session, User } from "@prisma/client"
+import { Bot, Chat, MessageUser, Message as PrismaMessage,  User } from "@prisma/client"
 import { createMessageInDB } from "@/actions/create-message"
 import { Camera, Flag, MoreVertical, Send, Trash2 } from "lucide-react"
 import Link from "next/link"

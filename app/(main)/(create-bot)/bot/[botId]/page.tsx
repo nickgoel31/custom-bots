@@ -6,19 +6,23 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { checkIfUserAlreadyHasAChatWithBot } from '@/helpers/check-if-chat'
 import { getBotFromId } from '@/helpers/get-bot'
 import useBot from '@/hooks/useBot'
+import useUserDB from '@/hooks/useUserDB'
+import { useAuth, useUser } from '@clerk/nextjs'
+import { Bot } from '@prisma/client'
 import { Verified } from 'lucide-react'
-import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound, redirect, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
-const BotPage = ({params}:{params:{botId:string}}) => {
+const BotPage = ({ params }:{params:{botId:string}}) => {
     const [createdChat,setCreatedChat] = useState({res:false, chatId:""})
     const [loading, setLoading] = useState(false)
-    const bot = useBot(params.botId)
-    const session = useSession()
+    const session = useAuth()
+    if(!session.userId) return;
+    const user = useUserDB(session.userId)
     const router = useRouter()
+    const bot = useBot(params.botId)
     if(!bot) {
         setTimeout(() => {
             notFound();
@@ -26,19 +30,13 @@ const BotPage = ({params}:{params:{botId:string}}) => {
         return;
     }
 
-    // useEffect(() => {
-    //     if(createdChat.res === true){
-    //         redirect(`/chat/${createdChat.chatId}`)
-    //     }
-    // },[createdChat.res])
-
     function handleClick(){
         setLoading(true)
-        if(!bot || !session || !session.data || !session.data.user || !session.data.user.email) {
+        if(!bot || !session || !session.userId || !user || !user.email) {
             console.log("no bot or session", bot, session)
             return;
         }
-        checkIfUserAlreadyHasAChatWithBot(bot.id, session.data.user.email)
+        checkIfUserAlreadyHasAChatWithBot(bot.id, user.email)
             .then(chat => {
                 if(chat){
                     //TAKE THE USER TO CHAT
@@ -47,8 +45,8 @@ const BotPage = ({params}:{params:{botId:string}}) => {
                 }
                 else{
                     //create chat with bot
-                    if(!bot || !session || !session.data || !session.data.user || !session.data.user.email) return;
-                    createChatInDb(bot.id, session.data.user.email)
+                    if(!bot || !session || !session.userId || !user || !user.email) return;
+                    createChatInDb(bot.id, user.email)
                         .then(res => {
                             if(res?.id){
                                 setCreatedChat({res:true, chatId: res.id})

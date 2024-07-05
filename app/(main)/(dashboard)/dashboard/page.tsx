@@ -6,29 +6,19 @@ import introJs from 'intro.js'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import DisplayNameInput from '../_components/display-name-input'
-import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
 import { getUserByEmail } from '@/helpers/get-user'
+import { auth, currentUser, getAuth } from '@clerk/nextjs/server'
+import { createUserInDB } from '@/actions/create-user'
 
 const DashboardPage = async  () => {
-  // const fetchIpAddress = async () => {
-  //   try {
-  //     const response = await fetch("/api/get-ip-address");
-  //     if (!response.ok) {
-  //       throw new Error("Failed to fetch IP address");
-  //     }
-  //     const data = await response.json();
-  //     console.log(data.ipAddress); // Assuming the response JSON structure includes ipAddress
-  //   } catch (error) {
-  //     console.error("Error fetching IP address:", error);
-  //   }
-  // };
+  const userAuth = await currentUser()
+  if(!userAuth?.emailAddresses[0].emailAddress) return;
+  const user = await getUserByEmail(userAuth.emailAddresses[0].emailAddress)
+  if(!user) {
+    redirect("/dashboard/create-user")
+  }
   
-  // fetchIpAddress();
-  const session = await auth()
-  if (!session || !session.user?.email) redirect("/sign-in")
-  const user = await getUserByEmail(session.user.email)
-  if(!user) return;
   
   return (
     <div className='w-full py-4 space-y-10'>

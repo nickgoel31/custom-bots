@@ -8,8 +8,9 @@ const nextConfig = {
                 port:"",
                 pathname:"**"
             },
-        ]
-    }
+        ],
+        unoptimized: true,
+    },
 };
 
 export default nextConfig;

@@ -8,10 +8,16 @@ import { extractRouterConfig } from "uploadthing/server";
 
 import { ourFileRouter } from "@/app/api/uploadthing/core";
 import { SessionProvider } from "next-auth/react";
-import { auth } from "@/auth";
 import { Toaster } from "sonner";
 import Navbar from "./(main)/(dashboard)/_components/navbar";
 import HomeNavbar from "@/components/home-nav";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
 
 // Initialize the Inter font with desired subsets
 const inter = Inter({ subsets: ["latin"] });
@@ -37,6 +43,7 @@ export default function RootLayout({
   // Render the layout with the session provider
   return (
     // <SessionProvider session={session}>
+    <ClerkProvider>
       <html lang="en"> {/* This is the corrected placement */}
         <body className={inter.className}> {/* Body tag should wrap the content */}
           <NextSSRPlugin
@@ -46,6 +53,6 @@ export default function RootLayout({
           <Toaster />
         </body>
       </html>
-    // </SessionProvider>
+      </ClerkProvider>
   );
 }

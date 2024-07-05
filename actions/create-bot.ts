@@ -4,12 +4,13 @@ import { verifiedUsers } from "@/data"
 import { getUserByEmail } from "@/helpers/get-user"
 import { db } from "@/lib/db"
 import { botSchema } from "@/schemas"
+import { User } from "@prisma/client"
 import { revalidatePath } from "next/cache"
 import Error from "next/error"
 import { z } from "zod"
 
 export const createBotInDb = async (values: z.infer<typeof botSchema>, creatorEmail:string) => {
-    const user = await getUserByEmail(creatorEmail)
+    const user:User | null = await getUserByEmail(creatorEmail)
     if(!user) return {message: `Bot Creation Failed.\n Error: USER NOT FOUND`, messageCode: `F001`}
     // Add code here
     let isVerified = false;

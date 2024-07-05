@@ -12,17 +12,21 @@ import {
   } from "@/components/ui/popover"
 import { signOut } from "next-auth/react"
 import { Button } from '@/components/ui/button'
-import { User } from 'next-auth'
 import { notFound } from 'next/navigation'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { MenuIcon } from 'lucide-react'
+import { UserButton, useAuth, useUser } from '@clerk/nextjs'
+import useUserDB from '@/hooks/useUserDB'
+import { User } from '@prisma/client'
  
   
 
 
 const Navbar = () => {
-    const session = useSession()
-    if(!session.data || !session.data.user) return notFound()
+    const user = useAuth()
+    if(!user || !user.userId) return;
+    const userDB = useUserDB(user.userId)
+    if(!userDB) return;
   return (
     <div className='fixed backdrop-blur-md border-b p-2 flex items-center justify-center px-6 lg:px-16 w-full h-16'>
         <div className='flex items-center justify-between w-full max-w-screen-xl mx-auto'>
@@ -30,8 +34,8 @@ const Navbar = () => {
                 Custom Bots
             </h1>
 
-            <NavLinks user={session.data.user}/>
-            <MobileNavLinks user={session.data.user}/>
+            <NavLinks user={userDB}/>
+            <MobileNavLinks user={userDB}/>
         </div> 
     </div>
   )
@@ -41,6 +45,7 @@ export default Navbar
 
 
 function NavLinks({user}:{user:User}){
+    
     return (
         <div className='hidden lg:block'>
         {
@@ -67,19 +72,7 @@ function NavLinks({user}:{user:User}){
                 </Link>
             </li>
             <li>
-            <Popover>
-                <PopoverTrigger>
-                    <Avatar className='h-8 w-8'>
-                        <AvatarImage src={user?.image || "https://github.com/shadcn.png"} />
-                        <AvatarFallback>
-                            {user.name?.slice(0, 1).toUpperCase() || "U"}
-                        </AvatarFallback>
-                    </Avatar>
-                </PopoverTrigger>
-                <PopoverContent>
-                    <Button onClick={() => signOut()}>Signout</Button>
-                </PopoverContent>
-            </Popover>
+            <UserButton />
     
             
     
@@ -142,9 +135,9 @@ function MobileNavLinks({user}:{user:User}){
             <Popover>
                 <PopoverTrigger>
                     <Avatar className='h-8 w-8'>
-                        <AvatarImage src={user?.image || "https://github.com/shadcn.png"} />
+                        <AvatarImage src={user.image || "https://github.com/shadcn.png"} />
                         <AvatarFallback>
-                            {user?.name?.slice(0, 1).toUpperCase() || "U"}
+                            {user.displayName?.slice(0, 1).toUpperCase() || "U"}
                         </AvatarFallback>
                     </Avatar>
                 </PopoverTrigger>

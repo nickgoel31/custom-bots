@@ -3,11 +3,13 @@
 import { getUserByEmail } from "@/helpers/get-user"
 import { db } from "@/lib/db"
 import { botSchema } from "@/schemas"
+import { User } from "@prisma/client"
+
 import Error from "next/error"
 import { z } from "zod"
 
 export const updateBotInDb = async (values: z.infer<typeof botSchema>, botId:string, creatorEmail:string) => {
-    const user = await getUserByEmail(creatorEmail)
+    const user:User | null = await getUserByEmail(creatorEmail)
     if(!user) return {message: `Bot Updation Failed.\n Error: USER NOT FOUND`, messageCode: `F001`}
     // Add code here
     const validatedFields = botSchema.safeParse(values)

@@ -10,10 +10,10 @@ import ChatUI from "../_components/chat-ui"
 import { getChatFromChatId } from "@/helpers/get-chat"
 import { notFound } from "next/navigation"
 import { getBotFromId } from "@/helpers/get-bot"
-import { getUserByEmail, getUserById } from "@/helpers/get-user"
-import { auth } from "@/auth"
+import { getUserByClerkId, getUserByEmail, getUserById } from "@/helpers/get-user"
 import { getMessagesFromChatId } from "@/helpers/get-message"
 import { Message } from "@prisma/client"
+import { auth } from "@clerk/nextjs/server"
 
 
 
@@ -29,16 +29,16 @@ const ChatPage = async ({params}:{params:{chatId:string}}) => {
     if(!chatUser) return;
 
     const session = await auth()
-    if(!session || !session.user || !session.user.email) {
+    if(!session || !session.userId || !session.sessionId) {
         return
     }
 
-    const user = await getUserByEmail(session.user.email)
+    const user = await getUserByClerkId(session.userId)
     if(!user)return;
 
     
 
-    if(session.user.email !== chatUser.email){
+    if(session.userId !== chatUser.clerkId){
         notFound()
     }
     

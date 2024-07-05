@@ -27,8 +27,6 @@ import {
 import UploadBotPicDialog from "./upload-pic-dialog"
 import Image from "next/image"
 import { botSchema, gendersArray } from "@/schemas"
-import useAuth from "@/hooks/useAuth"
-import { useSession } from "next-auth/react"
 import { createBotInDb } from "@/actions/create-bot"
 import { redirect, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -36,6 +34,8 @@ import { Bot } from "@prisma/client"
 import { updateBotInDb } from "@/actions/update-bot"
 import { Switch } from "./ui/switch"
 import { botCategories } from "@/types"
+import { useAuth } from "@clerk/nextjs"
+import useUserDB from "@/hooks/useUserDB"
   
 
 
@@ -44,7 +44,9 @@ import { botCategories } from "@/types"
 
 
 function EditBotForm({bot}:{bot:Bot}) {
-    const session = useSession()
+    const session = useAuth()
+    if(!session.userId || !session.isSignedIn) return;
+    const user = useUserDB(session.userId)
     const [botUpdated, setBotUpdated] = useState<boolean>(false)
     const [loading, setLoading] = useState(false)
 
@@ -81,8 +83,8 @@ function EditBotForm({bot}:{bot:Bot}) {
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof botSchema>) {
     setLoading(true)
-    if(!session || !session.data || !session.data.user || !session.data.user.email) return;
-    updateBotInDb(values, bot.id, session.data.user.email)
+    if(!user || !user.email) return;
+    updateBotInDb(values, bot.id, user.email)
         .then(res => {
             if(res.messageCode === "S001"){
                 setBotUpdated(true)

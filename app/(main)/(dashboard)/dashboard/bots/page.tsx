@@ -2,18 +2,18 @@ import { Button } from '@/components/ui/button'
 import { getBotsFromUserId } from '@/helpers/get-bot'
 import Link from 'next/link'
 import React from 'react'
-import { auth } from "@/auth"
 import { getUserByEmail } from "@/helpers/get-user"
 import { redirect } from 'next/navigation'
 import Image from 'next/image'
 
 import DeleteBotBtn from '../../_components/delete-bot-btn'
+import { currentUser } from '@clerk/nextjs/server'
   
 
 const DashboardBotsPage = async () => {
-    const session = await auth()
-    if (!session || !session.user?.email) redirect("/sign-in")
-    const user = await getUserByEmail(session.user.email)
+    const session = await currentUser()
+    if (!session) redirect("/sign-in")
+    const user = await getUserByEmail(session.emailAddresses[0].emailAddress)
     if(!user) return;
     const bots = await getBotsFromUserId(user.id)
   return (
