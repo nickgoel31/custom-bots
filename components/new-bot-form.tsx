@@ -64,8 +64,8 @@ function NewBotForm() {
     console.log()
     
     const isCategoryValid = botReplicateDetails.category && botCategories.includes(botReplicateDetails.category)
+
     
-    if(!session.userId || !session.isSignedIn) return;
     
   // 1. Define your form.
   const form = useForm<z.infer<typeof botSchema>>({
@@ -93,6 +93,8 @@ function NewBotForm() {
         redirect("/dashboard")
     }
   },[botCreated])
+
+  if(!session.userId || !session.isSignedIn) return;
  
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof botSchema>) {

@@ -48,7 +48,7 @@ function EditBotForm({bot}:{bot:Bot}) {
     const user = useUserDB(session.userId)
     const [botUpdated, setBotUpdated] = useState<boolean>(false)
     const [loading, setLoading] = useState(false)
-    if(!session.userId || !session.isSignedIn) return;
+    
 
     
     
@@ -79,6 +79,8 @@ function EditBotForm({bot}:{bot:Bot}) {
         redirect("/dashboard")
     }
   },[botUpdated])
+
+  if(!session.userId || !session.isSignedIn) return;
  
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof botSchema>) {
