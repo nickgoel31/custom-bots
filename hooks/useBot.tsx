@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { auth } from "@/auth"
 import { getUserByEmail } from "@/helpers/get-user"
 import { Bot, User } from "@prisma/client"
 
