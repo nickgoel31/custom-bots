@@ -43,7 +43,6 @@ import useUserDB from "@/hooks/useUserDB"
 
 function NewBotForm() {
     const session = useAuth()
-    if(!session.userId || !session.isSignedIn) return;
     const user = useUserDB(session.userId)
     const [botCreated, setBotCreated] = useState<boolean>(false)
     const [loading, setLoading] = useState(false)
@@ -63,8 +62,10 @@ function NewBotForm() {
     }
     const searchParamsIsRolePlay = botReplicateDetails.isRoleplay === "false" ? false : botReplicateDetails.isRoleplay === "true" ? true : false
     console.log()
-
+    
     const isCategoryValid = botReplicateDetails.category && botCategories.includes(botReplicateDetails.category)
+    
+    if(!session.userId || !session.isSignedIn) return;
     
   // 1. Define your form.
   const form = useForm<z.infer<typeof botSchema>>({

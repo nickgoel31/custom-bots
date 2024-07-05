@@ -24,9 +24,8 @@ import { User } from '@prisma/client'
 
 const Navbar = () => {
     const user = useAuth()
-    if(!user || !user.userId) return;
     const userDB = useUserDB(user.userId)
-    if(!userDB) return;
+    if(!user || !user.userId || !userDB) return;
   return (
     <div className='fixed backdrop-blur-md border-b p-2 flex items-center justify-center px-6 lg:px-16 w-full h-16'>
         <div className='flex items-center justify-between w-full max-w-screen-xl mx-auto'>

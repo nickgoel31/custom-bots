@@ -45,10 +45,10 @@ import useUserDB from "@/hooks/useUserDB"
 
 function EditBotForm({bot}:{bot:Bot}) {
     const session = useAuth()
-    if(!session.userId || !session.isSignedIn) return;
     const user = useUserDB(session.userId)
     const [botUpdated, setBotUpdated] = useState<boolean>(false)
     const [loading, setLoading] = useState(false)
+    if(!session.userId || !session.isSignedIn) return;
 
     
     

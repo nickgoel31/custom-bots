@@ -19,10 +19,10 @@ const BotPage = ({ params }:{params:{botId:string}}) => {
     const [createdChat,setCreatedChat] = useState({res:false, chatId:""})
     const [loading, setLoading] = useState(false)
     const session = useAuth()
-    if(!session.userId) return;
     const user = useUserDB(session.userId)
     const router = useRouter()
     const bot = useBot(params.botId)
+    if(!session.userId) return;
     if(!bot) {
         setTimeout(() => {
             notFound();

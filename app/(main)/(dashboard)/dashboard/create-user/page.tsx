@@ -8,9 +8,9 @@ import { useRouter } from "next/navigation"
 
 const CreateUser = () => {
     const user = useAuth()
-    if(!user || !user.userId) return;
     const userDB = useUserDB(user.userId)
     const router = useRouter()
+    if(!user || !user.userId) return;
     if(!userDB) {
         createUserInDB()
             .then((res) => {
