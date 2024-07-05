@@ -2,8 +2,7 @@ import { clerkMiddleware } from "@clerk/nextjs/server";
 
 export default clerkMiddleware({
   afterSignInUrl:"/dashboard",
-  afterSignUpUrl: "/dashboard",
-  publishableKey: "pk_test_bm90YWJsZS1mb3hob3VuZC02OC5jbGVyay5hY2NvdW50cy5kZXYk"
+  afterSignUpUrl: "/dashboard"
 });
 
 export const config = {
