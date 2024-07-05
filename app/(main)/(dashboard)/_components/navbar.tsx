@@ -131,20 +131,7 @@ function MobileNavLinks({user}:{user:User}){
                 </Link>
             </li>
             <li>
-            <Popover>
-                <PopoverTrigger>
-                    <Avatar className='h-8 w-8'>
-                        <AvatarImage src={user.image || "https://github.com/shadcn.png"} />
-                        <AvatarFallback>
-                            {user.displayName?.slice(0, 1).toUpperCase() || "U"}
-                        </AvatarFallback>
-                    </Avatar>
-                </PopoverTrigger>
-                <PopoverContent>
-                    <Button onClick={() => signOut()}>Signout</Button>
-                </PopoverContent>
-            </Popover>
-    
+                <UserButton />
             
     
             </li>
