@@ -9,7 +9,7 @@ import { MessageUser } from "@prisma/client";
 import fs from "fs";
 import fetch from "node-fetch"
   
-  const apiKey = process.env.GEMINI_API_KEY || "AIzaSyB3uBDJB8dgz8YtINtJO6Yzhx7vE5GA1uk"
+  const apiKey = process.env.GEMINI_API_KEY || "AIzaSyDhkFUwPr0Rw7jDExi7go1DsxLjS4pPH_Y"
   if(!apiKey) throw new Error("API KEY FOR GEMINI NOT FOUND")
   const genAI = new GoogleGenerativeAI(apiKey);
 
